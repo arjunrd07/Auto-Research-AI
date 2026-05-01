@@ -25,11 +25,11 @@ graph TD
     B -->|JSON Data| C{FastAPI Backend}
     C -->|Store| D[(SQLite DB)]
     
-     "AI Intelligence Layer"
+    subgraph  "AI Intelligence Layer"
     E[BART-Large-CNN] ---|Abstractive Summary| C
     F[Mistral-7B] ---|Gap Detection & Outreach|
     
-     "Orchestration Layer"
+    subgraph "Orchestration Layer"
     G[n8n Workflows] ---|Webhooks| C
     G -->|Parallel Exec| H[Email/Telegram]
     end
