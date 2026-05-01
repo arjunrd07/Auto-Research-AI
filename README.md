@@ -21,17 +21,18 @@ The platform operates as a circular feedback loop rather than a linear pipeline[
 ### 2. Detailed Technical Architecture
 ```mermaid
 graph TD
-    A[arXiv API] -->|Search/Monitor| B(ArXiv Service)
+     A[arXiv API] -->|Search/Monitor| B(ArXiv Service)
     B -->|JSON Data| C{FastAPI Backend}
     C -->|Store| D[(SQLite DB)]
     
-    subgraph  "AI Intelligence Layer"
-    E[BART-Large-CNN] ---|Abstractive Summary| C
-    F[Mistral-7B] ---|Gap Detection & Outreach|
+    subgraph AI_Intelligence_Layer
+        E[BART-Large-CNN] ---|Abstractive Summary| C
+        F[Mistral-7B] ---|Gap Detection & Outreach| C
+    end
     
-    subgraph "Orchestration Layer"
-    G[n8n Workflows] ---|Webhooks| C
-    G -->|Parallel Exec| H[Email/Telegram]
+    subgraph Orchestration_Layer
+        G[n8n Workflows] ---|Webhooks| C
+        G -->|Parallel Exec| H[Email/Telegram]
     end
     
     I[Streamlit Dashboard] ---|User Control| C
